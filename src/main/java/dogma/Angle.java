@@ -23,15 +23,15 @@ public interface Angle {
     return new InRadians(turns * 2 * Math.PI);
   }
 
-  /** Returns the angle in degrees. */
+  /** Returns this angle in degrees. */
   default public double getDegrees() {
     return this.getRadians() / Math.PI * 180.0;
   }
 
-  /** Returns the angle in radians. */
+  /** Returns this angle in radians. */
   public double getRadians();
 
-  /** Returns the angle in turns. */
+  /** Returns this angle in turns. */
   default public double getTurns() {
     return this.getRadians() / (2 * Math.PI);
   }
