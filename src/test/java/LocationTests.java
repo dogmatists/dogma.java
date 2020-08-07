@@ -2,6 +2,8 @@
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.junit.jupiter.api.Test;
 
 import dogma.Location;
@@ -26,5 +28,13 @@ public class LocationTests {
   void testInvalidLongitude() {
     assertThrows(IllegalArgumentException.class, () -> Location.of(0, -181));
     assertThrows(IllegalArgumentException.class, () -> Location.of(0, 181));
+  }
+
+  @Test
+  void testJacksonJSON() {
+    final Location location = Location.of(-10.12345678, 20.12345678);
+    assertDoesNotThrow(() -> {
+      assertEquals("{\"latitude\":-10.12345678,\"longitude\":20.12345678}", new ObjectMapper().writeValueAsString(location));
+    });
   }
 }

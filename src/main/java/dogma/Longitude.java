@@ -4,6 +4,7 @@ package dogma;
 
 import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 public interface Longitude extends Angle {
   public static final int MIN_DEGREES = -180;
@@ -33,6 +34,7 @@ public interface Longitude extends Angle {
   /** Returns this longitude in degrees. */
   @Override
   @FloatRange(from=-180.0, to=180.0)
+  @JsonValue
   default public double getDegrees() {
     return this.getRadians() / Math.PI * 180.0;
   }
