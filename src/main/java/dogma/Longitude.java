@@ -20,7 +20,7 @@ public interface Longitude extends Angle {
 
   /** Constructs a longitude from an angle. */
   @NonNull
-  public static Longitude of(final Angle angle) {
+  public static Longitude of(@NonNull final Angle angle) {
     return of(angle.getDegrees());
   }
 

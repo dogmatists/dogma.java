@@ -20,7 +20,7 @@ public interface Latitude extends Angle {
 
   /** Constructs a latitude from an angle. */
   @NonNull
-  public static Latitude of(final Angle angle) {
+  public static Latitude of(@NonNull final Angle angle) {
     return of(angle.getDegrees());
   }
 
