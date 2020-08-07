@@ -3,7 +3,8 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.Test;
 
 import dogma.Latitude;
@@ -27,6 +28,17 @@ public class LatitudeTests {
     final Latitude latitude = Latitude.of(42.12345678);
     assertDoesNotThrow(() -> {
       assertEquals("42.12345678", new ObjectMapper().writeValueAsString(latitude));
+    });
+  }
+
+  @Test
+  void testGsonJSON() {
+    final Latitude latitude = Latitude.of(42.12345678);
+    assertDoesNotThrow(() -> {
+      final Gson gson = new GsonBuilder()
+          .registerTypeHierarchyAdapter(Latitude.class, new Latitude.GsonSerializer())
+          .create();
+      assertEquals("42.12345678", gson.toJson(latitude));
     });
   }
 }

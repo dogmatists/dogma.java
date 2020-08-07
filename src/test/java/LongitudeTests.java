@@ -3,7 +3,8 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.Test;
 
 import dogma.Longitude;
@@ -27,6 +28,17 @@ public class LongitudeTests {
     final Longitude longitude = Longitude.of(42.12345678);
     assertDoesNotThrow(() -> {
       assertEquals("42.12345678", new ObjectMapper().writeValueAsString(longitude));
+    });
+  }
+
+  @Test
+  void testGsonJSON() {
+    final Longitude longitude = Longitude.of(42.12345678);
+    assertDoesNotThrow(() -> {
+      final Gson gson = new GsonBuilder()
+          .registerTypeHierarchyAdapter(Longitude.class, new Longitude.GsonSerializer())
+          .create();
+      assertEquals("42.12345678", gson.toJson(longitude));
     });
   }
 }

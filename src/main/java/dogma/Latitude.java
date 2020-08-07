@@ -4,7 +4,6 @@ package dogma;
 
 import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 public interface Latitude extends Angle {
   public static final int MIN_DEGREES = -90;
@@ -34,7 +33,7 @@ public interface Latitude extends Angle {
   /** Returns this latitude in degrees. */
   @Override
   @FloatRange(from=-90.0, to=90.0)
-  @JsonValue
+  @com.fasterxml.jackson.annotation.JsonValue
   default public double getDegrees() {
     return this.getRadians() / Math.PI * 180.0;
   }
@@ -44,6 +43,16 @@ public interface Latitude extends Angle {
 
     protected InRadians(final double radians) {
       super(radians);
+    }
+  }
+
+  public class GsonSerializer implements com.google.gson.JsonSerializer<Latitude> {
+    @Override
+    public com.google.gson.JsonElement serialize(
+          @NonNull final Latitude latitude,
+          final java.lang.reflect.Type type,
+          final com.google.gson.JsonSerializationContext context) {
+      return new com.google.gson.JsonPrimitive(latitude.getDegrees());
     }
   }
 }

@@ -3,10 +3,13 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.Test;
 
+import dogma.Latitude;
 import dogma.Location;
+import dogma.Longitude;
 
 public class LocationTests {
   @Test
@@ -34,7 +37,21 @@ public class LocationTests {
   void testJacksonJSON() {
     final Location location = Location.of(-10.12345678, 20.12345678);
     assertDoesNotThrow(() -> {
-      assertEquals("{\"latitude\":-10.12345678,\"longitude\":20.12345678}", new ObjectMapper().writeValueAsString(location));
+      assertEquals("{\"latitude\":-10.12345678,\"longitude\":20.12345678}",
+          new ObjectMapper().writeValueAsString(location));
+    });
+  }
+
+  @Test
+  void testGsonJSON() {
+    final Location location = Location.of(-10.12345678, 20.12345678);
+    assertDoesNotThrow(() -> {
+      Gson gson = new GsonBuilder()
+          .registerTypeHierarchyAdapter(Latitude.class, new Latitude.GsonSerializer())
+          .registerTypeHierarchyAdapter(Longitude.class, new Longitude.GsonSerializer())
+          .create();
+      assertEquals("{\"latitude\":-10.12345678,\"longitude\":20.12345678}",
+          gson.toJson(location));
     });
   }
 }

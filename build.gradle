@@ -29,6 +29,10 @@ dependencies {
   // See: https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
   compileOnly 'com.fasterxml.jackson.core:jackson-annotations:2.11.2'
 
+  // See: https://github.com/google/gson/releases
+  // See: https://mvnrepository.com/artifact/com.google.code.gson/gson
+  compileOnly 'com.google.code.gson:gson:2.8.6'
+
   // See: https://github.com/junit-team/junit5/releases
   // See: https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
   testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
@@ -37,4 +41,8 @@ dependencies {
   // See: https://github.com/FasterXML/jackson-databind/releases
   // See: https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
   testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.11.2'
+
+  // See: https://github.com/google/gson/releases
+  // See: https://mvnrepository.com/artifact/com.google.code.gson/gson
+  testImplementation 'com.google.code.gson:gson:2.8.6'
 }

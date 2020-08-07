@@ -3,10 +3,8 @@
 package dogma;
 
 import androidx.annotation.NonNull;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({ "latitude", "longitude" })
+@com.fasterxml.jackson.annotation.JsonPropertyOrder({ "latitude", "longitude" })
 public interface Location {
   /** Constructs a location from a latitude and longitude given as degrees. */
   @NonNull
@@ -22,12 +20,12 @@ public interface Location {
 
   /** Returns the latitude of this location. */
   @NonNull
-  @JsonGetter("latitude")
+  @com.fasterxml.jackson.annotation.JsonGetter("latitude")
   public Latitude getLatitude();
 
   /** Returns the longitude of this location. */
   @NonNull
-  @JsonGetter("longitude")
+  @com.fasterxml.jackson.annotation.JsonGetter("longitude")
   public Longitude getLongitude();
 
   class InRadians implements Location {
