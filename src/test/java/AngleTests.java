@@ -37,4 +37,11 @@ public class AngleTests {
     assertTrue(Angle.fromDegrees(0).compareTo(Angle.fromDegrees(-1)) > 0);
     assertTrue(Angle.fromDegrees(-1).compareTo(Angle.fromDegrees(0)) < 0);
   }
+
+  @Test
+  void testSerializable() {
+    final Angle angle1 = Angle.fromDegrees(180);
+    final Angle angle2 = Helpers.roundtrip(angle1);
+    assertEquals(angle1.getDegrees(), angle2.getDegrees());
+  }
 }

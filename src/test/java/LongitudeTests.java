@@ -31,6 +31,13 @@ public class LongitudeTests {
   }
 
   @Test
+  void testSerializable() {
+    final Longitude longitude1 = Longitude.of(42.12345678);
+    final Longitude longitude2 = Helpers.roundtrip(longitude1);
+    assertEquals(longitude1.getDegrees(), longitude2.getDegrees());
+  }
+
+  @Test
   void testJacksonJSON() {
     final Longitude longitude = Longitude.of(42.12345678);
     assertDoesNotThrow(() -> {

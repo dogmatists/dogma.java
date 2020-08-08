@@ -31,6 +31,13 @@ public class LatitudeTests {
   }
 
   @Test
+  void testSerializable() {
+    final Latitude latitude1 = Latitude.of(42.12345678);
+    final Latitude latitude2 = Helpers.roundtrip(latitude1);
+    assertEquals(latitude1.getDegrees(), latitude2.getDegrees());
+  }
+
+  @Test
   void testJacksonJSON() {
     final Latitude latitude = Latitude.of(42.12345678);
     assertDoesNotThrow(() -> {

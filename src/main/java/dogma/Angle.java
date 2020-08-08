@@ -3,8 +3,12 @@
 package dogma;
 
 import androidx.annotation.NonNull;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public interface Angle extends Comparable<Angle> {
+public interface Angle extends Comparable<Angle>, Serializable {
   /** Constructs an angle from degrees. */
   @NonNull
   public static Angle fromDegrees(final double degrees) {
@@ -38,9 +42,7 @@ public interface Angle extends Comparable<Angle> {
 
   @Override
   default public int compareTo(@NonNull final Angle other) {
-    final double a = this.getRadians();
-    final double b = other.getRadians();
-    return Double.compare(a, b);
+    return Double.compare(this.getRadians(), other.getRadians());
   }
 
   class InRadians implements Angle {
@@ -55,6 +57,14 @@ public interface Angle extends Comparable<Angle> {
     @Override
     public double getRadians() {
       return this.radians;
+    }
+
+    private void writeObject(@NonNull final ObjectOutputStream out) throws IOException {
+      out.defaultWriteObject();
+    }
+
+    private void readObject(@NonNull final ObjectInputStream in) throws IOException, ClassNotFoundException {
+      in.defaultReadObject();
     }
   }
 }
