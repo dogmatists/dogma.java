@@ -4,7 +4,7 @@ package dogma;
 
 import androidx.annotation.NonNull;
 
-public interface Angle {
+public interface Angle extends Comparable<Angle> {
   /** Constructs an angle from degrees. */
   @NonNull
   public static Angle fromDegrees(final double degrees) {
@@ -34,6 +34,13 @@ public interface Angle {
   /** Returns this angle in turns. */
   default public double getTurns() {
     return this.getRadians() / (2 * Math.PI);
+  }
+
+  @Override
+  default public int compareTo(@NonNull final Angle other) {
+    final double a = this.getRadians();
+    final double b = other.getRadians();
+    return Double.compare(a, b);
   }
 
   class InRadians implements Angle {

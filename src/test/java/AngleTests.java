@@ -30,4 +30,11 @@ public class AngleTests {
     assertEquals(0.5, Angle.fromTurns(0.5).getTurns());
     assertEquals(1, Angle.fromTurns(1).getTurns());
   }
+
+  @Test
+  void testComparable() {
+    assertTrue(Angle.fromDegrees(0).compareTo(Angle.fromDegrees(0)) == 0);
+    assertTrue(Angle.fromDegrees(0).compareTo(Angle.fromDegrees(-1)) > 0);
+    assertTrue(Angle.fromDegrees(-1).compareTo(Angle.fromDegrees(0)) < 0);
+  }
 }

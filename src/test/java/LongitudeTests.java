@@ -24,6 +24,13 @@ public class LongitudeTests {
   }
 
   @Test
+  void testComparable() {
+    assertTrue(Longitude.of(0).compareTo(Longitude.of(0)) == 0);
+    assertTrue(Longitude.of(0).compareTo(Longitude.of(-1)) > 0);
+    assertTrue(Longitude.of(-1).compareTo(Longitude.of(0)) < 0);
+  }
+
+  @Test
   void testJacksonJSON() {
     final Longitude longitude = Longitude.of(42.12345678);
     assertDoesNotThrow(() -> {

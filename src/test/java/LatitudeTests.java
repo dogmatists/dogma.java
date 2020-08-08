@@ -24,6 +24,13 @@ public class LatitudeTests {
   }
 
   @Test
+  void testComparable() {
+    assertTrue(Latitude.of(0).compareTo(Latitude.of(0)) == 0);
+    assertTrue(Latitude.of(0).compareTo(Latitude.of(-1)) > 0);
+    assertTrue(Latitude.of(-1).compareTo(Latitude.of(0)) < 0);
+  }
+
+  @Test
   void testJacksonJSON() {
     final Latitude latitude = Latitude.of(42.12345678);
     assertDoesNotThrow(() -> {
