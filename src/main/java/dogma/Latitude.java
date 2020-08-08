@@ -38,11 +38,20 @@ public interface Latitude extends Angle {
     return this.getRadians() / Math.PI * 180.0;
   }
 
+  /** Creates and returns a copy of this latitude. */
+  @Override
+  public Latitude clone();
+
   class InRadians extends Angle.InRadians implements Latitude {
     private static final long serialVersionUID = 1L;
 
     protected InRadians(final double radians) {
       super(radians);
+    }
+
+    @Override
+    public Latitude clone() {
+      return (Latitude)super.clone();
     }
   }
 

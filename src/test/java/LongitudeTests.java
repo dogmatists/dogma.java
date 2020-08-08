@@ -24,6 +24,15 @@ public class LongitudeTests {
   }
 
   @Test
+  void testCloneable() {
+    final Longitude longitude = Longitude.of(42.12345678);
+    assertDoesNotThrow(() -> longitude.clone());
+    assertNotNull(longitude.clone());
+    assertTrue(longitude.clone() instanceof Longitude);
+    assertEquals(longitude.getRadians(), longitude.clone().getRadians());
+  }
+
+  @Test
   void testComparable() {
     assertTrue(Longitude.of(0).compareTo(Longitude.of(0)) == 0);
     assertTrue(Longitude.of(0).compareTo(Longitude.of(-1)) > 0);

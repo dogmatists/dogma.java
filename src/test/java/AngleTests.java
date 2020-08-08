@@ -32,6 +32,15 @@ public class AngleTests {
   }
 
   @Test
+  void testCloneable() {
+    final Angle angle = Angle.fromTurns(0.5);
+    assertDoesNotThrow(() -> angle.clone());
+    assertNotNull(angle.clone());
+    assertTrue(angle.clone() instanceof Angle);
+    assertEquals(angle.getRadians(), angle.clone().getRadians());
+  }
+
+  @Test
   void testComparable() {
     assertTrue(Angle.fromDegrees(0).compareTo(Angle.fromDegrees(0)) == 0);
     assertTrue(Angle.fromDegrees(0).compareTo(Angle.fromDegrees(-1)) > 0);

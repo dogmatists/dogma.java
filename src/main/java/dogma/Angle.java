@@ -8,7 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public interface Angle extends Comparable<Angle>, Serializable {
+public interface Angle extends Cloneable, Comparable<Angle>, Serializable {
   /** Constructs an angle from degrees. */
   @NonNull
   public static Angle fromDegrees(final double degrees) {
@@ -40,6 +40,9 @@ public interface Angle extends Comparable<Angle>, Serializable {
     return this.getRadians() / (2 * Math.PI);
   }
 
+  /** Creates and returns a copy of this angle. */
+  public Angle clone();
+
   @Override
   default public int compareTo(@NonNull final Angle other) {
     return Double.compare(this.getRadians(), other.getRadians());
@@ -57,6 +60,16 @@ public interface Angle extends Comparable<Angle>, Serializable {
     @Override
     public double getRadians() {
       return this.radians;
+    }
+
+    @Override
+    public Angle clone() {
+      try {
+        return (Angle)super.clone();
+      }
+      catch (final CloneNotSupportedException error) {
+        throw new AssertionError(); // unreachable
+      }
     }
 
     private void writeObject(@NonNull final ObjectOutputStream out) throws IOException {

@@ -24,6 +24,15 @@ public class LatitudeTests {
   }
 
   @Test
+  void testCloneable() {
+    final Latitude latitude = Latitude.of(42.12345678);
+    assertDoesNotThrow(() -> latitude.clone());
+    assertNotNull(latitude.clone());
+    assertTrue(latitude.clone() instanceof Latitude);
+    assertEquals(latitude.getRadians(), latitude.clone().getRadians());
+  }
+
+  @Test
   void testComparable() {
     assertTrue(Latitude.of(0).compareTo(Latitude.of(0)) == 0);
     assertTrue(Latitude.of(0).compareTo(Latitude.of(-1)) > 0);

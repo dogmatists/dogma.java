@@ -38,11 +38,20 @@ public interface Longitude extends Angle {
     return this.getRadians() / Math.PI * 180.0;
   }
 
+  /** Creates and returns a copy of this longitude. */
+  @Override
+  public Longitude clone();
+
   class InRadians extends Angle.InRadians implements Longitude {
     private static final long serialVersionUID = 1L;
 
     protected InRadians(final double radians) {
       super(radians);
+    }
+
+    @Override
+    public Longitude clone() {
+      return (Longitude)super.clone();
     }
   }
 
